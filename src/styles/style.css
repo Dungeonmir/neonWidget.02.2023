@@ -1,0 +1,9 @@
+@font-face
+{
+font-family: "RosaMarena";
+src: url('../fonts/RosaMarena.ttf');
+}
+
+body{
+    background-color: rgb(182, 125, 236);
+}

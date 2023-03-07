@@ -6,9 +6,11 @@ export default class WidgetCanvas{
     _divCanvas: HTMLCanvasElement
     _fabricCanvas: fabric.Canvas
     constructor(base:Base){
-        const canvasClass = 'canvas22'
+        const canvasClass = 'canvasFabric'
         this.makeCanvasDiv(base, canvasClass)
         this._fabricCanvas = new fabric.Canvas(canvasClass);
+        this._fabricCanvas.setBackgroundColor('#101010', ()=>{console.log('color changed \n' + Date.now())})
+        this._fabricCanvas.setDimensions({height:500, width:500})
     }
 
     private makeCanvasDiv(base: Base, canvasClass: string) {
@@ -57,10 +59,8 @@ export default class WidgetCanvas{
 
         return rect
     }
-    addText(text: string){
-        var textComponent = new fabric.IText(text, {
-            fontFamily: "RosaMarena",
-        })
+    addText(text: string, options: fabric.ITextOptions = {}){
+        var textComponent = new fabric.IText(text, options)
         this.addToScene([textComponent])
        return textComponent
     }

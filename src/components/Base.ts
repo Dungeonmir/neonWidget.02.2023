@@ -3,9 +3,9 @@ export default class Base {
     _height: number
     _divBase: HTMLDivElement
     
-    constructor(mountDiv: string, w: number, h: number) {
+    constructor(mountPlace: string, w: number, h: number) {
         this._width = w
         this._height = h
-        this._divBase = document.querySelector('.'+mountDiv);
+        this._divBase = document.querySelector(mountPlace);
     }
 }

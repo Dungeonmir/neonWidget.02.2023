@@ -7,3 +7,6 @@
     min-width: 30px;
     min-height: 30px;
 }
+.btn:active{
+    border-width: 3px;
+}

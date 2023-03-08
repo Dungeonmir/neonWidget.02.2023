@@ -7,7 +7,7 @@ export default class Widget{
     private _canvas: WidgetCanvas
     constructor(){
         this._element = document.createElement('div')
-        document.body.appendChild(this._element)
+        document.querySelector('body').appendChild(this._element)
     }
 
     loadFonts(fonts:string[]){

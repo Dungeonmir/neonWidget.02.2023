@@ -1,18 +1,18 @@
 import { Point, Size } from './../resources/types';
 import {fabric} from "fabric";
-import CanvasBase from './CanvasBase';
 
 export default class WidgetCanvas{
     _canvasElement: HTMLCanvasElement
     _canvas: fabric.Canvas
-    _currentActiveObject: fabric.Object
+    _selectedObjects: fabric.Object[]
     constructor(mountElement: HTMLDivElement){
         const canvasClass = 'canvasFabric'
         this.makeCanvasDiv(mountElement, canvasClass)
         this._canvas = new fabric.Canvas(canvasClass);
         this._canvas.setBackgroundColor('#101010', ()=>{console.log('color changed \n' + Date.now())})
         this._canvas.setDimensions({height:500, width:500})
-        this._canvas.on('selection:created', ()=>{this._currentActiveObject=this._canvas.getActiveObject()} )
+        this._canvas.on('selection:created', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
+        this._canvas.on('selection:cleared', ()=>{this._selectedObjects=null})
     }
 
     private makeCanvasDiv(mountElement:HTMLDivElement, canvasClass: string) {
@@ -43,7 +43,6 @@ export default class WidgetCanvas{
     }
     addToScene( object: fabric.Object[], shouldRender: boolean = true){
         this._canvas.add(...object)
-        this._currentActiveObject = (object.slice(-1)[0])
         shouldRender  && this._canvas.renderAll()
     }
     addRect(w:number,h:number, color: string = 'blue'){
@@ -68,7 +67,7 @@ export default class WidgetCanvas{
        return textComponent
     }
     deleteLastActiveObject(){
-        this._canvas.remove(this._currentActiveObject)
+        this._selectedObjects && this._canvas.remove(...this._selectedObjects)
     }
 
 }

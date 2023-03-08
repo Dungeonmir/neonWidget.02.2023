@@ -11,7 +11,7 @@ export default class Bar {
         mountElement.appendChild(this._element);
         this._element.classList.add('bar')
         let b = new Button('T', ()=>{canvas.addText("Текст", {fill: "white"})}, this._element)
-        
+        let deleteBtn = new Button('D', ()=>{canvas.deleteLastActiveObject()}, this._element)
         let tooltip = new Tooltip('Добавить текст', b.getElement())
         //mount other components
     }

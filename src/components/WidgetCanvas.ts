@@ -3,32 +3,34 @@ import {fabric} from "fabric";
 import CanvasBase from './CanvasBase';
 
 export default class WidgetCanvas{
-    _divCanvas: HTMLCanvasElement
-    _fabricCanvas: fabric.Canvas
+    _canvasElement: HTMLCanvasElement
+    _canvas: fabric.Canvas
+    _currentActiveObject: fabric.Object
     constructor(mountElement: HTMLDivElement){
         const canvasClass = 'canvasFabric'
         this.makeCanvasDiv(mountElement, canvasClass)
-        this._fabricCanvas = new fabric.Canvas(canvasClass);
-        this._fabricCanvas.setBackgroundColor('#101010', ()=>{console.log('color changed \n' + Date.now())})
-        this._fabricCanvas.setDimensions({height:500, width:500})
+        this._canvas = new fabric.Canvas(canvasClass);
+        this._canvas.setBackgroundColor('#101010', ()=>{console.log('color changed \n' + Date.now())})
+        this._canvas.setDimensions({height:500, width:500})
+        this._canvas.on('selection:created', ()=>{this._currentActiveObject=this._canvas.getActiveObject()} )
     }
 
     private makeCanvasDiv(mountElement:HTMLDivElement, canvasClass: string) {
         const canvas = document.createElement('canvas')
         mountElement.appendChild(canvas)
         canvas.id = canvasClass
-        this._divCanvas = canvas
+        this._canvasElement = canvas
        
     }
     resize(w:number, h:number){
-        this._fabricCanvas.setWidth(w)
-        this._fabricCanvas.setHeight(h)
-        this._fabricCanvas.renderAll()
+        this._canvas.setWidth(w)
+        this._canvas.setHeight(h)
+        this._canvas.renderAll()
     }
     getSize(){
         const s:Size = {
-            width:  this._fabricCanvas.width,
-            height:  this._fabricCanvas.height
+            width:  this._canvas.width,
+            height:  this._canvas.height
         }
         return s
     }
@@ -40,8 +42,9 @@ export default class WidgetCanvas{
         return c
     }
     addToScene( object: fabric.Object[], shouldRender: boolean = true){
-        this._fabricCanvas.add(...object)
-        shouldRender  && this._fabricCanvas.renderAll()
+        this._canvas.add(...object)
+        this._currentActiveObject = (object.slice(-1)[0])
+        shouldRender  && this._canvas.renderAll()
     }
     addRect(w:number,h:number, color: string = 'blue'){
         var rect = new fabric.Rect({
@@ -64,4 +67,8 @@ export default class WidgetCanvas{
         this.addToScene([textComponent])
        return textComponent
     }
+    deleteLastActiveObject(){
+        this._canvas.remove(this._currentActiveObject)
+    }
+
 }

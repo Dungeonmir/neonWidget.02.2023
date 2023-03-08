@@ -36,5 +36,5 @@ export default class Widget{
     getCanvas(): WidgetCanvas{
         return this._canvas
     }
-    
+
 }

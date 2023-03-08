@@ -1,29 +1,15 @@
 //imports
 import '../src/styles/style.css'
-import Base from "./components/Base";
-import WidgetCanvas from "./components/WidgetCanvas";
-import { fonts, mountLocation } from "./resources/constants";
-import {preloadFonts} from './components/Preload';
-import Upbar from './components/Upbar';
-import Select from './components/Select';
-import { IText } from 'fabric/fabric-impl';
+import { fonts } from "./resources/constants";
+
+import Widget from './Widget';
 window.addEventListener('load', onload)
 
-
-preloadFonts(fonts, mountLocation)
+const widget = new Widget()
+widget.loadFonts(fonts)
 
 function onload(){
-    const base = new Base(mountLocation, 500, 500)
-    const canvas = new WidgetCanvas(base)
-    const upbar = new Upbar(mountLocation)
-    const select = new Select(fonts, (ev:Event)=>{
-        console.log((ev.target as HTMLInputElement).value);
-        (canvas._fabricCanvas._activeObject as IText).fontFamily = (ev.target as HTMLInputElement).value
-        canvas._fabricCanvas.renderAll()
-    }, document.querySelector(mountLocation))
-    canvas.addRect(40, 100)
-
-    canvas.addText("text randomness", {fill: "white"})
-
-    
+    widget.createCanvas()
+    widget.createUpbar()
+   
 }

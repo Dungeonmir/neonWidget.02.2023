@@ -1,4 +1,4 @@
-export default class Base {
+export default class CanvasBase {
     _width: number
     _height: number
     _divBase: HTMLDivElement

@@ -1,4 +1,4 @@
-export const  mountLocation = '.neonWidget'
+export const  baseLocation = '.neonWidget'
 export const fonts = [
     "RosaMarena",       "StudioScriptCTT", 
     "Veles",            "PFHandbookPro", 

@@ -1,21 +1,21 @@
 import { Point, Size } from './../resources/types';
 import {fabric} from "fabric";
-import Base from "./Base";
+import CanvasBase from './CanvasBase';
 
 export default class WidgetCanvas{
     _divCanvas: HTMLCanvasElement
     _fabricCanvas: fabric.Canvas
-    constructor(base:Base){
+    constructor(mountElement: HTMLDivElement){
         const canvasClass = 'canvasFabric'
-        this.makeCanvasDiv(base, canvasClass)
+        this.makeCanvasDiv(mountElement, canvasClass)
         this._fabricCanvas = new fabric.Canvas(canvasClass);
         this._fabricCanvas.setBackgroundColor('#101010', ()=>{console.log('color changed \n' + Date.now())})
         this._fabricCanvas.setDimensions({height:500, width:500})
     }
 
-    private makeCanvasDiv(base: Base, canvasClass: string) {
+    private makeCanvasDiv(mountElement:HTMLDivElement, canvasClass: string) {
         const canvas = document.createElement('canvas')
-        base._divBase.append(canvas)
+        mountElement.appendChild(canvas)
         canvas.id = canvasClass
         this._divCanvas = canvas
        

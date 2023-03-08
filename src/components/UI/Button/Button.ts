@@ -1,3 +1,4 @@
+import './button.css'
 export default class Button {
     private _text: string
     private _onClick: Function
@@ -21,4 +22,7 @@ export default class Button {
         this._text = text
     }
     
+    getElement(){
+        return this._buttonDiv
+    }
 }

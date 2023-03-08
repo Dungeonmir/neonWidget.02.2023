@@ -1,0 +1,8 @@
+.bar{
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}

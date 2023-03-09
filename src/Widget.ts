@@ -1,13 +1,22 @@
 import Bar from "./components/Bar/Bar"
-import WidgetCanvas from "./components/WidgetCanvas"
+import ObjectProperties from "./components/ObjectProperties/ObjectProperties"
+import WidgetCanvas from "./components/WidgetCanvas/WidgetCanvas"
 import { baseLocation } from "./resources/constants"
 export default class Widget{
     private _element: HTMLDivElement
     private _upbar: Bar
     private _canvas: WidgetCanvas
+    private _objectPropertiesBar: ObjectProperties
     constructor(){
         this._element = document.createElement('div')
         document.querySelector('body').appendChild(this._element)
+
+       
+    }
+    initialize(){
+        this._canvas = new WidgetCanvas(this._element)
+        this._upbar = new Bar(this._element, this._canvas)
+        this._objectPropertiesBar = new ObjectProperties(this._element,this._canvas)
     }
 
     loadFonts(fonts:string[]){
@@ -18,12 +27,6 @@ export default class Widget{
             p.style.position = 'absolute'
             this._element.appendChild(p)
         })
-    }
-    createUpbar(){
-        this._upbar = new Bar(this._element, this._canvas)
-    }
-    createCanvas(){
-       this._canvas = new WidgetCanvas(this._element)
     }
     createSelect(){ /* Change fonts
         const select = new Select(fonts, (ev:Event)=>{

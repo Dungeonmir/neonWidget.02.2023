@@ -64,3 +64,6 @@ src: url('../fonts/AmericanRetro.ttf');
     font-family: cursive;
 }
 
+.canvas-container{
+    margin: 0 auto;
+}

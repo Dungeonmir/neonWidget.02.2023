@@ -9,7 +9,5 @@ const widget = new Widget()
 widget.loadFonts(fonts)
 
 function onload(){
-    widget.createCanvas()
-    widget.createUpbar()
-   
+    widget.initialize()
 }

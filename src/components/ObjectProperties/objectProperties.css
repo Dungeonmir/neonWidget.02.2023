@@ -1,0 +1,25 @@
+.option{
+    background-color: #101010;
+    max-width: 500px;
+    margin: 0 auto;
+    opacity: 1;
+    transition: 0.4s all;
+    
+}
+.subOption{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.label{
+    color: white;
+}
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s all;
+}

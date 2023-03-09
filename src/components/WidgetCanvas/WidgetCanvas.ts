@@ -1,4 +1,4 @@
-import { Point, Size } from './../resources/types';
+import { Point, Size } from '../../resources/types';
 import {fabric} from "fabric";
 
 export default class WidgetCanvas{
@@ -9,9 +9,10 @@ export default class WidgetCanvas{
         const canvasClass = 'canvasFabric'
         this.makeCanvasDiv(mountElement, canvasClass)
         this._canvas = new fabric.Canvas(canvasClass);
-        this._canvas.setBackgroundColor('#101010', ()=>{console.log('color changed \n' + Date.now())})
+        this._canvas.setBackgroundColor('#101010', ()=>{})
         this._canvas.setDimensions({height:500, width:500})
         this._canvas.on('selection:created', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
+        this._canvas.on('selection:updated', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
         this._canvas.on('selection:cleared', ()=>{this._selectedObjects=null})
     }
 
@@ -25,7 +26,7 @@ export default class WidgetCanvas{
     resize(w:number, h:number){
         this._canvas.setWidth(w)
         this._canvas.setHeight(h)
-        this._canvas.renderAll()
+        this.update()
     }
     getSize(){
         const s:Size = {
@@ -43,7 +44,7 @@ export default class WidgetCanvas{
     }
     addToScene( object: fabric.Object[], shouldRender: boolean = true){
         this._canvas.add(...object)
-        shouldRender  && this._canvas.renderAll()
+        shouldRender  && this.update()
     }
     addRect(w:number,h:number, color: string = 'blue'){
         var rect = new fabric.Rect({
@@ -69,5 +70,7 @@ export default class WidgetCanvas{
     deleteLastActiveObject(){
         this._selectedObjects && this._canvas.remove(...this._selectedObjects)
     }
-
+    update(){
+        this._canvas.requestRenderAll()
+    }
 }

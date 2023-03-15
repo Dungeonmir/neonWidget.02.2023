@@ -1,5 +1,7 @@
 import { Point, Size } from '../../resources/types';
 import {fabric} from "fabric";
+import ShadowText from '../ShadowText';
+
 
 export default class WidgetCanvas{
     _canvasElement: HTMLCanvasElement
@@ -62,10 +64,21 @@ export default class WidgetCanvas{
 
         return rect
     }
-    addText(text: string, options: fabric.ITextOptions = {}){
-        var textComponent = new fabric.IText(text, options)
-        this.addToScene([textComponent])
-       return textComponent
+    addText(text: string){
+        const textElement = new ShadowText(text, 10, 'red')
+        /*this._canvas.on("before:selection:cleared", ()=>{
+            if(this._selectedObjects[0].constructor.prototype.type=='i-text'){
+                const textEl = this._selectedObjects[0] as fabric.IText
+                
+            }
+        } )*/
+        textElement.set({
+            left: this._canvas.width / 2 - textElement.width / 2,
+            top: this._canvas.height / 2 - textElement.height / 2
+        })
+        this.addToScene([ textElement])
+        textElement.changeShadow('red')
+       return textElement
     }
     deleteLastActiveObject(){
         this._selectedObjects && this._canvas.remove(...this._selectedObjects)

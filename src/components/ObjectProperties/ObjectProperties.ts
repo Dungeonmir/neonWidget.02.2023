@@ -1,7 +1,10 @@
 import { Gradient, Group, Pattern } from "fabric/fabric-impl";
+import { colors } from "../../resources/constants";
 import ShadowText from "../ShadowText";
 import Button from "../UI/Button/Button";
+import ColorButton from "../UI/Button/ColorButton";
 import WidgetCanvas from "../WidgetCanvas/WidgetCanvas";
+import ColorPickButtons from "./ColorButtons/ColorPickButtons";
 import './objectProperties.css'
 export default class ObjectProperties{
     private _element: HTMLDivElement;
@@ -66,19 +69,10 @@ export default class ObjectProperties{
     optionColors(){
         
     const optionElement = this.addOption('Цвет')
-    
-       new Button('Синий', ()=>{this.changeShadow('blue')}, optionElement)
-       new Button('Красный', ()=>{this.changeShadow('red')}, optionElement)
-       new Button('Желтый', ()=>{this.changeShadow('yellow')}, optionElement)
-    const svg = document.createElement('div')
-   svg.innerHTML = `
-   <svg height="100" width="100" >
-  <circle class="svgImage" cx="50" cy="50" r="40" stroke="white" stroke-width="2" fill="#101010" />
-  Sorry, your browser does not support inline SVG.  
-    </svg> 
-   `
-   optionElement.appendChild(svg)
-    }
+    const colorPickButtons = new ColorPickButtons(this._canvas)
+    optionElement.appendChild(colorPickButtons.element)
+
+    }   
     
     changeShadow(color: string ){
         this._canvas._selectedObjects.map((obj: ShadowText)=>{

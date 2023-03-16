@@ -1,7 +1,6 @@
 import Bar from "./components/Bar/Bar"
 import ObjectProperties from "./components/ObjectProperties/ObjectProperties"
 import WidgetCanvas from "./components/WidgetCanvas/WidgetCanvas"
-import { baseLocation } from "./resources/constants"
 export default class Widget{
     private _element: HTMLDivElement
     private _upbar: Bar

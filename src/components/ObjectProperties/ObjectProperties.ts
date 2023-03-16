@@ -20,17 +20,20 @@ export default class ObjectProperties{
         this.optionColors()
 
     }
-    addLabel(labelText: string, mountElement: HTMLDivElement){
-        const label = document.createElement('p')
+    addOptionDiv(){
+        const optionDiv = document.createElement('div')
+        optionDiv.classList.add('option')
+        return optionDiv
+    }
+    addOption(labelText: string = ''){
+        
+       
+        const label = document.createElement('div')
         label.textContent = labelText
         label.classList.add('label')
-        mountElement.appendChild(label)
-    }
-    addOption(label: string = null){
-        const option = document.createElement('div')
-        option.classList.add('option')
-        this._element.appendChild(option)
-        label && this.addLabel(label, option)
+        this._element.appendChild(label)
+        const option = this.addOptionDiv()
+        label.appendChild(option)
 
         return option
     }
@@ -48,20 +51,13 @@ export default class ObjectProperties{
     }
     optionText(){
         const optionElement = this.addOption('Текст')
-        const suboptionsEl = document.createElement('div')
-        suboptionsEl.classList.add('subOption')
-        optionElement.appendChild(suboptionsEl)
-        
-        const input = document.createElement('input')
-        input.type = 'text'
+        const input = document.createElement('textarea')
+        input.classList.add('textarea')
         optionElement.appendChild(input) 
         input.oninput = (e)=>{
-            let value = (e.target as HTMLInputElement).value
+            const value = (e.target as HTMLTextAreaElement).value
             this._canvas._selectedObjects.map((obj: ShadowText)=>{
-                obj.getObjects().map((textObj: fabric.Text)=>{
-                    textObj.set({text: value})
-                })
-                obj.addWithUpdate()
+                obj.changeText(value)
             })
             this._canvas.update()
             
@@ -70,13 +66,20 @@ export default class ObjectProperties{
     optionColors(){
         
     const optionElement = this.addOption('Цвет')
-    const suboptionsEl = document.createElement('div')
-    suboptionsEl.classList.add('subOption')
-    optionElement.appendChild(suboptionsEl)
-       new Button('Синий', ()=>{this.changeShadow('blue')}, suboptionsEl)
-       new Button('Красный', ()=>{this.changeShadow('red')}, suboptionsEl)
-       new Button('Желтый', ()=>{this.changeShadow('yellow')}, suboptionsEl)
+    
+       new Button('Синий', ()=>{this.changeShadow('blue')}, optionElement)
+       new Button('Красный', ()=>{this.changeShadow('red')}, optionElement)
+       new Button('Желтый', ()=>{this.changeShadow('yellow')}, optionElement)
+    const svg = document.createElement('div')
+   svg.innerHTML = `
+   <svg height="100" width="100" >
+  <circle class="svgImage" cx="50" cy="50" r="40" stroke="white" stroke-width="2" fill="#101010" />
+  Sorry, your browser does not support inline SVG.  
+    </svg> 
+   `
+   optionElement.appendChild(svg)
     }
+    
     changeShadow(color: string ){
         this._canvas._selectedObjects.map((obj: ShadowText)=>{
             obj.changeShadow(color)

@@ -65,20 +65,23 @@ export default class WidgetCanvas{
         return rect
     }
     addText(text: string){
-        const textElement = new ShadowText(text, 10, 'red')
+        const textElement = new ShadowText(text, 8, 'red')
         /*this._canvas.on("before:selection:cleared", ()=>{
             if(this._selectedObjects[0].constructor.prototype.type=='i-text'){
                 const textEl = this._selectedObjects[0] as fabric.IText
                 
             }
         } )*/
-        textElement.set({
-            left: this._canvas.width / 2 - textElement.width / 2,
-            top: this._canvas.height / 2 - textElement.height / 2
-        })
+        this.moveToCenter(textElement)
         this.addToScene([ textElement])
         textElement.changeShadow('red')
        return textElement
+    }
+    moveToCenter(object: fabric.Object){
+        object.set({
+            left: this._canvas.width / 2 - object.width / 2,
+            top: this._canvas.height / 2 - object.height / 2, 
+        })
     }
     deleteLastActiveObject(){
         this._selectedObjects && this._canvas.remove(...this._selectedObjects)

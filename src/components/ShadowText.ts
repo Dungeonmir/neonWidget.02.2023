@@ -11,13 +11,21 @@ export default class ShadowText extends fabric.Group {
         this.changeShadow()
     }
     changeShadow(colorOfShadow = this._colorOfShadow){
-       
             this.getObjects().map((textObj, i)=>{
                 textObj.shadow = new fabric.Shadow({
                     color: colorOfShadow,
-                    blur: i*2,
-                    nonScaling: true
+                    blur: i*3,
+                    nonScaling: true,
                 })
+                textObj.set({dirty: true})
             })
+            this.dirty = true
+            
+    }
+    changeText(text: string = ""){
+        this.getObjects().map((textObj: fabric.Text)=>{
+            textObj.set({text: text})
+        })
+        this.addWithUpdate()
     }
 }

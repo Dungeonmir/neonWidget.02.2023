@@ -28,4 +28,12 @@ export default class ShadowText extends fabric.Group {
         })
         this.addWithUpdate()
     }
+
+    changeFont(font: string){
+        this.getObjects().map((textObj: fabric.Text)=>{
+            textObj.set({fontFamily: font})
+        })
+        this.set('dirty', true)
+        this.addWithUpdate()
+    }
 }

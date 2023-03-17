@@ -10,3 +10,6 @@
 .btn:active{
     border-width: 3px;
 }
+.btn:hover{
+    cursor: pointer;
+}

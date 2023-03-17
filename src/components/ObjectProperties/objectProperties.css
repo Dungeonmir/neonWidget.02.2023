@@ -37,6 +37,9 @@
     transition: 0.4s all;
     border-radius: 8px;
     padding: 8px;
+    width: 100%;
+    margin: 1em;
+    
 }
 .textarea:focus{
     outline: none;

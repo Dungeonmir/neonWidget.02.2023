@@ -17,6 +17,7 @@ export default class WidgetCanvas{
         this._canvas.on('selection:updated', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
         this._canvas.on('selection:cleared', ()=>{this._selectedObjects=null})
     }
+    
 
     private makeCanvasDiv(mountElement:HTMLDivElement, canvasClass: string) {
         const canvas = document.createElement('canvas')

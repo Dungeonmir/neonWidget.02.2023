@@ -1,6 +1,7 @@
 import { colors } from "../../../resources/constants";
 import ShadowText from "../../ShadowText";
 import Button from "../../UI/Button/Button";
+import Tooltip from "../../UI/Tooltip/Tooltip";
 import WidgetCanvas from "../../WidgetCanvas/WidgetCanvas";
 import './colorPickButton.css';
 export default class ColorPickButtons {
@@ -12,11 +13,12 @@ export default class ColorPickButtons {
             const button = new Button('', ()=>{
                 canvas?._selectedObjects?.map((obj: ShadowText)=>{
                     obj.changeShadow(color)
-                    
                 })
                 canvas.update()
+                
             }, this.element)
             button.getElement().classList.add('colorButton')
+            new Tooltip(colorKey, button.getElement())
             let boxShadow = ``
             for (let i = 0; i <4; i++) {
                 boxShadow +=`inset 0px 0px ${i*4}px ${color},`

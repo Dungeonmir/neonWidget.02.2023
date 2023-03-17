@@ -1,8 +1,8 @@
 export const  baseLocation = '.neonWidget'
 export const fonts = [
-    "RosaMarena",       "StudioScriptCTT", 
+    "MADELikes",        "RosaMarena",      
     "Veles",            "PFHandbookPro", 
-    "Nickainley",       "MADELikes",   
+    "Nickainley",       "StudioScriptCTT", 
     "LDSlender",        "Helvetica", 
     "CitricaCyrillic",  "BloggerSans",  
     "Birch",            "AmericanRetro"

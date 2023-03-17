@@ -1,6 +1,7 @@
 import { Point, Size } from '../../resources/types';
 import {fabric} from "fabric";
 import ShadowText from '../ShadowText';
+import { fonts } from '../../resources/constants';
 
 
 export default class WidgetCanvas{
@@ -16,6 +17,15 @@ export default class WidgetCanvas{
         this._canvas.on('selection:created', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
         this._canvas.on('selection:updated', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
         this._canvas.on('selection:cleared', ()=>{this._selectedObjects=null})
+
+        fabric.Object.prototype.objectCaching = false
+        fabric.Object.prototype.setControlsVisibility({
+            mb: false,
+            ml: false,
+            mr: false,
+            mt: false
+        })
+        fabric.Object.prototype.snapAngle = 15
     }
     
 
@@ -67,6 +77,7 @@ export default class WidgetCanvas{
     }
     addText(text: string){
         const textElement = new ShadowText(text, 8, 'red')
+        textElement.changeFont(fonts[0])
         /*this._canvas.on("before:selection:cleared", ()=>{
             if(this._selectedObjects[0].constructor.prototype.type=='i-text'){
                 const textEl = this._selectedObjects[0] as fabric.IText
@@ -88,6 +99,6 @@ export default class WidgetCanvas{
         this._selectedObjects && this._canvas.remove(...this._selectedObjects)
     }
     update(){
-        this._canvas.requestRenderAll()
+        this._canvas.renderAll()
     }
 }

@@ -58,6 +58,7 @@ export default class ObjectProperties{
         const input = document.createElement('textarea')
         input.classList.add('textarea')
         input.placeholder = 'Ваш текст'
+        input.rows = 3
         optionElement.appendChild(input) 
         input.oninput = (e)=>{
             const value = (e.target as HTMLTextAreaElement).value

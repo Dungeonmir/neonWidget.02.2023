@@ -4,7 +4,7 @@ export default class Button {
     private _onClick: Function
     private _buttonDiv: HTMLButtonElement
 
-    constructor(text: string, onclick: Function, mountPlace: HTMLElement) {
+    constructor(text: string = "", onclick: Function, mountPlace: HTMLElement) {
  
         this._text = text
         this._onClick = onclick

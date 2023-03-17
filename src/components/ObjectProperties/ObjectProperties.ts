@@ -79,6 +79,7 @@ export default class ObjectProperties{
 
     optionFonts(){
         const option = this.addOption('Шрифт')
+        option.classList.add('fontOption')
         fonts.map((font)=>{
             const button = new Button(font, ()=>{
                 this._canvas._selectedObjects.map((obj:ShadowText)=>{
@@ -86,6 +87,7 @@ export default class ObjectProperties{
                 })
                 this._canvas.update()
             }, option)
+            button.getElement().classList.add('fontOptionButton')
         })
        
     }

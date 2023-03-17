@@ -14,6 +14,7 @@
     "@types/fabric": "^4.5.15",
     "@types/lodash": "^4.14.191",
     "@types/webfontloader": "^1.6.35",
+    "svg-inline-loader": "^0.8.2",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
     "webpack": "^5.75.0",

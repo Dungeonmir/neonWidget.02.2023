@@ -6,6 +6,7 @@
     margin: 5px;
     min-width: 30px;
     min-height: 30px;
+    fill: white;
 }
 .btn:active{
     border-width: 3px;

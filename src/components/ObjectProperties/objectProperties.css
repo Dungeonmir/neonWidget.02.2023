@@ -46,3 +46,15 @@
     border: 1px white solid;
     transition: 0.4s all;
 }
+
+.fontOption{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.fontOptionButton{
+    width: 25%;
+    min-width: fit-content;
+}

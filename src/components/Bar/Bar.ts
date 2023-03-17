@@ -3,7 +3,8 @@ import Tooltip from "../UI/Tooltip/Tooltip";
 import Button from "../UI/Button/Button";
 import WidgetCanvas from '../WidgetCanvas/WidgetCanvas';
 import {fabric} from 'fabric';
-
+import AddTextIcon from '../../icons/text.svg'
+import TrashIcon from '../../icons/trash.svg'
 export default class Bar {
     _element: HTMLDivElement
     
@@ -16,6 +17,9 @@ export default class Bar {
         new Tooltip('Добавить текст', addTextBtn.getElement())
         new Tooltip('Удалить элемент', deleteElementBtn.getElement())
         //mount other components
+
+        addTextBtn.getElement().innerHTML = AddTextIcon
+        deleteElementBtn.getElement().innerHTML = TrashIcon
     }
     
 }

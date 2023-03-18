@@ -22,3 +22,6 @@ export const colors = {
 "Теплый белый" : "rgb(253, 244, 220)",
 "Холодный белый" : "rgb(244, 253, 255)"
 }
+export  const colorScheme = {
+    blue: 'rgb(153, 204, 255)'
+}

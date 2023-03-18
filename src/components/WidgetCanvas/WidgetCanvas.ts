@@ -1,7 +1,8 @@
 import { Point, Size } from '../../resources/types';
 import {fabric} from "fabric";
 import ShadowText from '../ShadowText';
-import { fonts } from '../../resources/constants';
+import { colorScheme, fonts } from '../../resources/constants';
+import ObjectOptions from './ObjectOptions';
 
 
 export default class WidgetCanvas{
@@ -17,15 +18,8 @@ export default class WidgetCanvas{
         this._canvas.on('selection:created', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
         this._canvas.on('selection:updated', ()=>{this._selectedObjects=this._canvas.getActiveObjects()} )
         this._canvas.on('selection:cleared', ()=>{this._selectedObjects=null})
-
-        fabric.Object.prototype.objectCaching = false
-        fabric.Object.prototype.setControlsVisibility({
-            mb: false,
-            ml: false,
-            mr: false,
-            mt: false
-        })
-        fabric.Object.prototype.snapAngle = 15
+        this._canvas.on('rotating', ()=>{this._selectedObjects.map(obj=>{obj.setCoords()})})
+        ObjectOptions()
     }
     
 

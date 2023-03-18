@@ -20,6 +20,7 @@ export default class ObjectProperties{
         this.optionText()
         this.optionColors()
         this.optionFonts()
+        
 
     }
     addOptionDiv(){
@@ -50,8 +51,7 @@ export default class ObjectProperties{
     updateVisibility(){
         this._element.classList.toggle('hidden')
 
-        //MUSOR 
-        console.log(this._canvas._canvas._activeObject)
+        this.showPrice()
     }
     optionText(){
         const optionElement = this.addOption('Текст')
@@ -88,6 +88,8 @@ export default class ObjectProperties{
                 this._canvas.update()
             }, option)
             button.getElement().classList.add('fontOptionButton')
+            button.getElement().style.fontFamily = font
+            button.getElement().style.fontSize = '1em'
         })
        
     }
@@ -97,5 +99,19 @@ export default class ObjectProperties{
             obj.dirty = true
         })
         this._canvas.update()
+    }
+    optionPrice(){
+        const option = this.addOption('Цена')
+    }
+    showPrice(){
+        
+        const wh = this._canvas?._selectedObjects?.map((obj)=>{
+            return {
+                width: obj.get('width'),
+             height: obj.get('height'),
+             scale: obj.getObjectScaling()
+            }
+        })
+        wh?.map(result=>{console.log(result)})
     }
 }

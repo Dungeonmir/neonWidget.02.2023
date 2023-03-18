@@ -9,8 +9,8 @@ export default class Tooltip {
         this._spanElement = document.createElement('span')
         this._spanElement.classList.add('tooltipText')
         this._spanElement.textContent = text
-
         mountPlace.classList.add('tooltip')
+        this.onHoverShowHigher(mountPlace)
         mountPlace.appendChild(this._spanElement)
     }
 
@@ -20,5 +20,12 @@ export default class Tooltip {
     set text(text){
         this._text = text
     }
-    
+    onHoverShowHigher(htmlEl: HTMLElement, onhoverZindex = '5', nohoverZindex = '1'){
+        htmlEl.addEventListener('mouseover', ()=>{
+            htmlEl.style.zIndex = onhoverZindex
+        })
+        htmlEl.addEventListener('mouseout', ()=>{
+            htmlEl.style.zIndex = nohoverZindex
+        })
+    }
 }

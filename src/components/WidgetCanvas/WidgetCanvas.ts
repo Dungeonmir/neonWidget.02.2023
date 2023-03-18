@@ -78,16 +78,16 @@ export default class WidgetCanvas{
                 
             }
         } )*/
-        this.moveToCenter(textElement)
+        this.alignObject(textElement)
         this.addToScene([ textElement])
         textElement.changeShadow('red')
        return textElement
     }
-    moveToCenter(object: fabric.Object){
-        object.set({
-            left: this._canvas.width / 2 - object.width / 2,
-            top: this._canvas.height / 2 - object.height / 2, 
-        })
+    alignObject(object: fabric.Object, horizontal:boolean =true, vertical: boolean = true){
+        vertical  &&   object.set('left', this._canvas.width / 2 - object.getScaledWidth() / 2)
+        horizontal    &&   object.set('top', this._canvas.height / 2 - object.getScaledHeight() / 2)    
+        this.update()
+        
     }
     deleteLastActiveObject(){
         this._selectedObjects && this._canvas.remove(...this._selectedObjects)

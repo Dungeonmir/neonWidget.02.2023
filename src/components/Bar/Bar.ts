@@ -5,6 +5,8 @@ import WidgetCanvas from '../WidgetCanvas/WidgetCanvas';
 import {fabric} from 'fabric';
 import AddTextIcon from '../../icons/text.svg'
 import TrashIcon from '../../icons/trash.svg'
+import CenterHorizontalIcon from '../../icons/center-horizontal.svg'
+import CenterVerticalIcon from '../../icons/center-vertical.svg'
 export default class Bar {
     _element: HTMLDivElement
     
@@ -12,14 +14,48 @@ export default class Bar {
         this._element = document.createElement('div')
         mountElement.appendChild(this._element);
         this._element.classList.add('bar')
-        const addTextBtn = new Button('T', ()=>{canvas.addText("Текст")}, this._element)
-        const deleteElementBtn = new Button('D', ()=>{canvas.deleteLastActiveObject()}, this._element)
-        new Tooltip('Добавить текст', addTextBtn.getElement())
-        new Tooltip('Удалить элемент', deleteElementBtn.getElement())
-        //mount other components
 
-        addTextBtn.getElement().innerHTML = AddTextIcon
-        deleteElementBtn.getElement().innerHTML = TrashIcon
+        const buttons = [
+            {
+                name: 'Добавить текст',
+                func: ()=>{
+                    canvas.addText("Текст")
+                    },
+                icon: AddTextIcon,
+                
+            },
+            {
+                name: 'Выровнять по горизонтали',
+                func: ()=>{
+                    
+                    canvas._selectedObjects?.map(obj=>{
+                        canvas.alignObject(obj, true, false)
+                    })
+                },
+                icon: CenterHorizontalIcon
+            },
+            {
+                name: 'Выровнять по вертикали',
+                func: ()=>{
+                    canvas._selectedObjects?.map(obj=>{
+                        canvas.alignObject(obj, false, true)
+                    })
+                },
+                icon: CenterVerticalIcon
+            },
+            {
+                name: 'Удалить элемент',
+                func: ()=>{
+                    canvas.deleteLastActiveObject()
+                    },
+                icon: TrashIcon,
+            }
+        ]
+        buttons.map((obj)=>{
+            const button = new Button('', obj.func, this._element)
+            button.getElement().innerHTML = obj.icon
+            new Tooltip(obj.name, button.getElement())
+        })
     }
     
 }

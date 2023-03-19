@@ -106,6 +106,10 @@ export default class ObjectProperties{
         priceDiv.classList.add('priceDiv')
         priceDiv.textContent =""
         option.appendChild(priceDiv)
+
+        this._canvas._canvas.on('object:modified', ()=>{
+            this.showPrice()
+        })
     }
     showPrice(){
         

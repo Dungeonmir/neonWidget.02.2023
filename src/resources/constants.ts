@@ -25,3 +25,9 @@ export const colors = {
 export  const colorScheme = {
     blue: 'rgb(153, 204, 255)'
 }
+
+export const prices = {
+    price1mm: 5,
+    priceforElement: 150
+
+}

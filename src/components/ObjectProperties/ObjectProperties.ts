@@ -1,5 +1,5 @@
 
-import { fonts } from "../../resources/constants";
+import { fonts, prices } from "../../resources/constants";
 import ShadowText from "../ShadowText";
 import Button from "../UI/Button/Button";
 import WidgetCanvas from "../WidgetCanvas/WidgetCanvas";
@@ -20,7 +20,7 @@ export default class ObjectProperties{
         this.optionText()
         this.optionColors()
         this.optionFonts()
-        
+        this.optionPrice()
 
     }
     addOptionDiv(){
@@ -101,17 +101,30 @@ export default class ObjectProperties{
         this._canvas.update()
     }
     optionPrice(){
-        const option = this.addOption('Цена')
+        const option = this.addOption('Стоимость')
+        const priceDiv = document.createElement('div')
+        priceDiv.classList.add('priceDiv')
+        priceDiv.textContent =""
+        option.appendChild(priceDiv)
     }
     showPrice(){
         
         const wh = this._canvas?._selectedObjects?.map((obj)=>{
-            return {
-                width: obj.get('width'),
-             height: obj.get('height'),
-             scale: obj.getObjectScaling()
+            let price = 0
+            let elements = 0
+            if(obj instanceof ShadowText){
+             elements = obj.getText().trim().length
             }
+            
+            let width =  Number.parseFloat(obj.getScaledWidth().toFixed(2))
+            let height = Number.parseFloat(obj.getScaledHeight().toFixed(2))
+            return price = (width * prices.price1mm) + (height * prices.price1mm) + elements * prices.priceforElement
         })
-        wh?.map(result=>{console.log(result)})
+        wh?.map(result=>{
+            const priceDiv = document.querySelector('.priceDiv')
+            result && (priceDiv.textContent = result?.toString() + 'р.')
+        })
     }
+
+    
 }

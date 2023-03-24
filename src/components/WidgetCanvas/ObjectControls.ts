@@ -53,7 +53,6 @@ export default function ObjectOptions(){
         mtr: false
     })
     fabric.Object.prototype.cornerColor = colorScheme.blue
-
     function sizeToString(size: number){
        return size.toFixed(2).toString().replace('.', ',') + ' мм'
     }

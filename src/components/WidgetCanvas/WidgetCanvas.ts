@@ -2,7 +2,7 @@ import { Point, Size } from '../../resources/types';
 import {fabric} from "fabric";
 import ShadowText from '../ShadowText';
 import { colorScheme, fonts } from '../../resources/constants';
-import ObjectOptions from './ObjectOptions';
+import ObjectOptions from './ObjectControls';
 
 
 export default class WidgetCanvas{

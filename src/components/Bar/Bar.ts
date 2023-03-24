@@ -7,13 +7,18 @@ import AddTextIcon from '../../icons/text.svg'
 import TrashIcon from '../../icons/trash.svg'
 import CenterHorizontalIcon from '../../icons/center-horizontal.svg'
 import CenterVerticalIcon from '../../icons/center-vertical.svg'
+import DownloadIcon from '../../icons/download.svg'
+import Downloader from './Downloder';
+
 export default class Bar {
     _element: HTMLDivElement
-    
+    _downloader: Downloader
     constructor(mountElement: HTMLDivElement, canvas: WidgetCanvas) {
         this._element = document.createElement('div')
         mountElement.appendChild(this._element);
         this._element.classList.add('bar')
+
+        this._downloader = new Downloader(mountElement)
 
         const buttons = [
             {
@@ -42,6 +47,13 @@ export default class Bar {
                     })
                 },
                 icon: CenterVerticalIcon
+            },
+            {
+                name: 'Сохранить в PNG',
+                func: () =>{
+                    this._downloader.dowload(this._downloader.render(canvas))
+                },
+                icon: DownloadIcon
             },
             {
                 name: 'Удалить элемент',

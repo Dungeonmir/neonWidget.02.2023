@@ -8,6 +8,7 @@ export default class ColorPickButtons {
     element: HTMLDivElement
     constructor(canvas: WidgetCanvas){
         this.element = document.createElement('div')
+        this.element.classList.add('colorPickButtons')
         Object.keys(colors).map((colorKey: string, index: number)=>{
             const color = Object.values(colors)[index]
             const button = new Button('', ()=>{
@@ -18,19 +19,10 @@ export default class ColorPickButtons {
                 
             }, this.element)
             button.getElement().classList.add('colorButton')
-            new Tooltip(colorKey, button.getElement())
-            let boxShadow = ``
-            for (let i = 0; i <4; i++) {
-                boxShadow +=`inset 0px 0px ${i*4}px ${color},`
-            }
-            boxShadow = boxShadow.slice(0, boxShadow.length-1)
-           
-            button.getElement().style.boxShadow = boxShadow
+            new Tooltip(colorKey, button.getElement())           
+            button.getElement().style.backgroundColor = color
 
             
         })
     }
 }
-
-//new ColorButton(colors.red, ()=>{this.changeShadow('blue')}, optionElement)
-    // color buttons class

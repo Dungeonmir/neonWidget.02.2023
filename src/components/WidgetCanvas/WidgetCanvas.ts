@@ -95,4 +95,7 @@ export default class WidgetCanvas{
     update(){
         this._canvas.renderAll()
     }
+    selectAll(){
+        return new fabric.ActiveSelection(this._canvas.getObjects(), {canvas: this._canvas})
+    }
 }

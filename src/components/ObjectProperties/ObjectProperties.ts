@@ -2,9 +2,11 @@
 import { fonts, prices } from "../../resources/constants";
 import ShadowText from "../ShadowText";
 import Button from "../UI/Button/Button";
+import Tooltip from "../UI/Tooltip/Tooltip";
 import WidgetCanvas from "../WidgetCanvas/WidgetCanvas";
 import ColorPickButtons from "./ColorButtons/ColorPickButtons";
 import './objectProperties.css'
+
 export default class ObjectProperties{
     private _element: HTMLDivElement;
     private _canvas: WidgetCanvas;
@@ -32,7 +34,7 @@ export default class ObjectProperties{
         
        
         const label = document.createElement('div')
-        label.textContent = labelText
+        label.classList.add(labelText)
         label.classList.add('label')
         this._element.appendChild(label)
         const option = this.addOptionDiv()
@@ -112,23 +114,23 @@ export default class ObjectProperties{
         })
     }
     showPrice(){
+        const selection = this._canvas.selectAll()
+        selection.ungroupOnCanvas()
+        let price = 0
+        let elements = 0
+        let width  = Number.parseFloat((Math.round((selection.width + Number.EPSILON) * 100) / 100).toString())
+        let height =  Number.parseFloat((Math.round((selection.height + Number.EPSILON) * 100) / 100).toString())
         
-        const wh = this._canvas?._selectedObjects?.map((obj)=>{
-            let price = 0
-            let elements = 0
+        selection.getObjects().map(obj=>{
             if(obj instanceof ShadowText){
-             elements = obj.getText().trim().length
-            }
-            
-            let width =  Number.parseFloat(obj.getScaledWidth().toFixed(2))
-            let height = Number.parseFloat(obj.getScaledHeight().toFixed(2))
-            return price = (width * prices.price1mm) + (height * prices.price1mm) + elements * prices.priceforElement
+                elements += obj.getText().trim().replace(' ', '').length
+               }
         })
-        wh?.map(result=>{
-            const priceDiv = document.querySelector('.priceDiv')
-            result && (priceDiv.textContent = result?.toString() + 'р.')
-        })
+        price = (width * prices.price1mm) + (height * prices.price1mm) + elements * prices.priceforElement
+        
+        const priceDiv = document.querySelector('.priceDiv')
+        price && ( priceDiv.textContent =price?.toString() + ' р.')
+        
+        const tooltipPrice = new Tooltip('Примерная стоимость вывески', priceDiv as HTMLDivElement)
     }
-
-    
 }

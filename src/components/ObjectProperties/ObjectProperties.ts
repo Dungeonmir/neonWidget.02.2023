@@ -53,7 +53,7 @@ export default class ObjectProperties{
     updateVisibility(){
         this._element.classList.toggle('hidden')
 
-        this.showPrice()
+        this.updatePrice()
     }
     optionText(){
         const optionElement = this.addOption('Текст')
@@ -110,10 +110,57 @@ export default class ObjectProperties{
         option.appendChild(priceDiv)
 
         this._canvas._canvas.on('object:modified', ()=>{
-            this.showPrice()
+            this.updatePrice()
         })
+
+        this.optionSend(option)
     }
-    showPrice(){
+    optionSend(mountElement:HTMLElement){
+        this.formOrder(mountElement)
+        
+    }
+    formOrder(mountElement:HTMLElement){
+        const formDiv = document.createElement('div')
+        formDiv.classList.add('formOrder')
+        
+        const phone = document.createElement('input')
+        phone.type ="tel"
+        phone.textContent = '8'
+        phone.placeholder = '80123456789'
+        phone.pattern = '8[0-9]*'
+        phone.minLength=11
+        phone.maxLength=11
+        phone.classList.add('phoneFormOrder')
+        formDiv.appendChild(phone)
+        mountElement.appendChild(formDiv)
+
+        const button = new Button('Заказать', ()=>{
+            const data = {
+                phone: (document.querySelector('.phoneFormOrder') as HTMLInputElement).value,
+                modelData: this.updatePrice(),
+                image: this._canvas._canvas.toDataURL()
+              };
+              fetch('http://localhost:5501/api/sendJSON', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data })
+              });
+        }, formDiv)
+        button.getElement().type ='submit'
+    } 
+    formRequired(){
+        const value = (document.querySelector('.phoneFormOrder') as HTMLInputElement).value
+        if(value.trim()==""){
+            return false
+        }
+        else{
+            console.log(value)
+        }
+    }
+ 
+    updatePrice(){
         const selection = this._canvas.selectAll()
         selection.ungroupOnCanvas()
         let price = 0
@@ -132,5 +179,11 @@ export default class ObjectProperties{
         price && ( priceDiv.textContent =price?.toString() + ' р.')
         
         const tooltipPrice = new Tooltip('Примерная стоимость вывески', priceDiv as HTMLDivElement)
+        return {
+            price,
+            width,
+            height,
+            elements
+        }
     }
 }

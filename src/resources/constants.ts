@@ -1,4 +1,5 @@
 export const baseLocation = ".neonWidget"
+export const serverUrl = "https://neon-widget-back.onrender.com"
 export const fonts = [
 	"MADELikes",
 	"RosaMarena",
@@ -67,7 +68,7 @@ export const getColors = () => {
 }
 
 export const getData = async () => {
-	const response = await fetch(process.env.SERVER_URL, {
+	const response = await fetch(serverUrl + "/data", {
 		method: "GET",
 		mode: "cors",
 	})

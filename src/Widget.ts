@@ -12,9 +12,9 @@ export default class Widget {
 		document.querySelector("body").appendChild(this._element)
 	}
 	async initialize() {
+		this._canvas = new WidgetCanvas(this._element)
 		await getData()
 		getColors()
-		this._canvas = new WidgetCanvas(this._element)
 		this._upbar = new Bar(this._element, this._canvas)
 		this._objectPropertiesBar = new ObjectProperties(
 			this._element,

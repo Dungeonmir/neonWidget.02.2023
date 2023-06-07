@@ -80,14 +80,31 @@ export const getDownloadName = () => {
 
 export const getData = async () => {
 	try {
+		const controller = new AbortController()
+		const timeout = setTimeout(() => {
+			controller.abort() // Если время вышло, остановка запроса
+		}, 3000) // Установка времени ожидания в 3 секунды
+
 		const response = await fetch(serverUrl + "/data", {
 			method: "GET",
 			mode: "cors",
+			signal: controller.signal, // Передача fetch-функции сигнала остановки
 		})
-		const json = await response.json()
-		console.log(json)
-		localStorage.setItem("data", JSON.stringify(json))
+
+		clearTimeout(timeout)
+
+		if (response.ok) {
+			const json = await response.json()
+			console.log(json)
+			localStorage.setItem("data", JSON.stringify(json))
+		} else {
+			console.error("Server responded with an error:", response.status)
+		}
 	} catch (error) {
-		console.error(error.message)
+		if (error.name === "AbortError") {
+			console.error("Request timed out.")
+		} else {
+			console.error(error.message)
+		}
 	}
 }

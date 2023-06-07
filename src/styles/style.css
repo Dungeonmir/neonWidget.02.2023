@@ -1,69 +1,8 @@
-@font-face
-{
-font-family: "RosaMarena";
-src: url('../fonts/RosaMarena.ttf');
-}
-@font-face
-{
-font-family: "StudioScriptCTT";  
-src: url('../fonts/StudioScriptCTT.ttf');
-}
-@font-face
-{
-font-family: "Veles";
-src: url('../fonts/Veles.ttf');
-}
-@font-face
-{
-font-family: "PFHandbookPro";
-src: url('../fonts/PFHandbookPro.ttf');
-}@font-face
-{
-font-family: "Nickainley";
-src: url('../fonts/Nickainley.ttf');
-}
-@font-face
-{
-font-family: "MADELikes";
-src: url('../fonts/MADELikes.ttf');
-}
-@font-face
-{
-font-family: "LDSlender";
-src: url('../fonts/LDSlender.ttf');
-}
-@font-face
-{
-font-family: "Helvetica";
-src: url('../fonts/Helvetica.ttf');
-}
-@font-face
-{
-font-family: "CitricaCyrillic";
-src: url('../fonts/CitricaCyrillic.ttf');
-}
-@font-face
-{
-font-family: "BloggerSans";
-src: url('../fonts/BloggerSans.ttf');
-}
-@font-face
-{
-font-family: "Birch";
-src: url('../fonts/Birch.ttf');
-}
-@font-face
-{
-font-family: "AmericanRetro";
-src: url('../fonts/AmericanRetro.ttf');
+.neonWidget {
+	background-color: rgba(173, 126, 126, 0);
+	font-family: cursive;
 }
 
-
-.neonWidget{
-    background-color: rgba(173, 126, 126, 0);
-    font-family: cursive;
-}
-
-.canvas-container{
-    margin: 0 auto;
+.canvas-container {
+	margin: 0 auto;
 }

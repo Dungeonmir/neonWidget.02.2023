@@ -1,4 +1,4 @@
-export default class Select {
+export default class Loader {
 	private _element: HTMLDivElement
 	createLoaderLabel = () => {
 		const label = document.createElement("div")

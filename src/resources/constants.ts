@@ -68,12 +68,26 @@ export const getColors = () => {
 	return response
 }
 
+export const getDownloadName = () => {
+	let response = ""
+	const data = JSON.parse(localStorage.getItem("data"))
+	if (!data) {
+		return "neon-widget"
+	}
+	response = data[4][1]
+	return response
+}
+
 export const getData = async () => {
-	const response = await fetch(serverUrl + "/data", {
-		method: "GET",
-		mode: "cors",
-	})
-	const json = await response.json()
-	console.log(json)
-	localStorage.setItem("data", JSON.stringify(json))
+	try {
+		const response = await fetch(serverUrl + "/data", {
+			method: "GET",
+			mode: "cors",
+		})
+		const json = await response.json()
+		console.log(json)
+		localStorage.setItem("data", JSON.stringify(json))
+	} catch (error) {
+		console.error(error.message)
+	}
 }

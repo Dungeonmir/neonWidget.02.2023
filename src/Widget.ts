@@ -2,7 +2,7 @@ import Bar from "./components/Bar/Bar"
 import Loader from "./components/Loader"
 import ObjectProperties from "./components/ObjectProperties/ObjectProperties"
 import WidgetCanvas from "./components/WidgetCanvas/WidgetCanvas"
-import { getColors, getData, getPriceElement } from "./resources/constants"
+import { getColors, getData } from "./resources/constants"
 export default class Widget {
 	private _element: HTMLDivElement
 	private _upbar: Bar
@@ -35,15 +35,7 @@ export default class Widget {
 			this._element.appendChild(p)
 		})
 	}
-	createSelect() {
-		/* Change fonts
-        const select = new Select(fonts, (ev:Event)=>{
-            console.log((ev.target as HTMLInputElement).value);
-            (canvas._fabricCanvas._activeObject as IText).fontFamily = (ev.target as HTMLInputElement).value
-            canvas._fabricCanvas.renderAll()
-        }, document.querySelector(baseLocation))
-    */
-	}
+
 	getCanvas(): WidgetCanvas {
 		return this._canvas
 	}

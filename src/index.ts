@@ -1,4 +1,4 @@
-//imports
+// Запуск основных функций виджета
 import "../src/styles/style.css"
 import { fonts } from "./resources/constants"
 

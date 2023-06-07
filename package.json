@@ -1,31 +1,31 @@
 {
-  "name": "neonwidget",
-  "version": "1.0.0",
-  "description": "",
-  "private": "true",
-  "scripts": {
-    "build": "npx webpack",
-    "dev": "npx webpack serve --mode=development"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/fabric": "^4.5.15",
-    "@types/lodash": "^4.14.191",
-    "@types/webfontloader": "^1.6.35",
-    "dotenv-webpack": "^8.0.1",
-    "svg-inline-loader": "^0.8.2",
-    "ts-loader": "^9.4.2",
-    "typescript": "^4.9.5",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
-  },
-  "dependencies": {
-    "css-loader": "^6.7.3",
-    "fabric": "^5.3.0",
-    "style-loader": "^3.3.1",
-    "url-loader": "^4.1.1"
-  }
+	"name": "neonwidget",
+	"version": "1.0.0",
+	"description": "",
+	"private": "true",
+	"scripts": {
+		"build": "npx webpack",
+		"dev": "npx webpack && npx webpack serve --mode=development"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/fabric": "^4.5.15",
+		"@types/lodash": "^4.14.191",
+		"@types/webfontloader": "^1.6.35",
+		"dotenv-webpack": "^8.0.1",
+		"svg-inline-loader": "^0.8.2",
+		"ts-loader": "^9.4.2",
+		"typescript": "^4.9.5",
+		"webpack": "^5.75.0",
+		"webpack-cli": "^5.0.1",
+		"webpack-dev-server": "^4.11.1"
+	},
+	"dependencies": {
+		"css-loader": "^6.7.3",
+		"fabric": "^5.3.0",
+		"style-loader": "^3.3.1",
+		"url-loader": "^4.1.1"
+	}
 }

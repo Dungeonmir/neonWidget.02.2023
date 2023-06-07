@@ -46,14 +46,9 @@
 	font-family: "AmericanRetro";
 	src: url("../fonts/AmericanRetro.ttf");
 }
-
-.neonWidget {
-	background-color: rgba(173, 126, 126, 0);
-	font-family: cursive;
-}
-
-.canvas-container {
-	margin: 0 auto;
+@font-face {
+	font-family: "InterLight";
+	src: url("../fonts/Inter-Light.ttf");
 }
 
 .neonWidget {
@@ -63,4 +58,37 @@
 
 .canvas-container {
 	margin: 0 auto;
+}
+
+.neonWidget {
+	background-color: rgba(173, 126, 126, 0);
+	font-family: InterLight, serif;
+}
+
+.canvas-container {
+	margin: 0 auto;
+}
+.loader {
+	width: min-content;
+	height: min-content;
+}
+.text {
+	font-family: InterLight;
+	font-size: 20px;
+	color: white;
+	width: max-content;
+}
+.containerRow {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+}
+.containerCol {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
 }

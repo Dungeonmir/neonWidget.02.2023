@@ -1,5 +1,6 @@
 export const baseLocation = ".neonWidget"
 export const serverUrl = "https://neon-widget-back.onrender.com"
+export const baseFont = "InterLight"
 export const fonts = [
 	"MADELikes",
 	"RosaMarena",

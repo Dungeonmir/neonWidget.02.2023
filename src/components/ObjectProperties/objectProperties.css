@@ -1,74 +1,84 @@
-.objectProperties{
-    margin: 0 auto;
+.objectProperties {
+	margin: 0 auto;
 }
-.option{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0.5em;
+.option {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-evenly;
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 0.5em;
+	padding-top: 0;
 }
-.subOption{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
+.subOption {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 5px;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
 }
-.label{
-    color: white;
-    background-color: #101010;
-    min-height: 4em;
-    max-width: 500px;
-    margin: 0 auto;
-    opacity: 1;
-    transition: 0.4s all;
+.label {
+	color: white;
+	background-color: #101010;
+	min-height: 4em;
+	max-width: 500px;
+	margin: 0 auto;
+	opacity: 1;
+	transition: 0.4s all;
 }
-.hidden{
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.4s all;
+.labelText {
+	margin: 0;
+	padding: 10px;
+	margin-left: 5px;
 }
-
-.textarea{
-    background-color: #101010;
-    color: white;
-    transition: 0.4s all;
-    border-radius: 8px;
-    padding: 8px;
-    width: 100%;
-    margin: 1em;
-    resize: vertical;
-}
-.textarea:focus{
-    outline: none;
-    border: 1px white solid;
-    transition: 0.4s all;
+.hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.4s all;
 }
 
-.fontOption{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+.textarea {
+	background-color: #101010;
+	color: white;
+	border-radius: 2px;
+	padding: 10px;
+	vertical-align: middle;
+	text-align: center;
+	width: 100%;
+	margin: 0 1em;
+	resize: vertical;
+	height: auto;
+	min-height: 20px;
+	font-size: 20px;
+}
+.textarea:focus {
+	outline: none;
+	border: 1px white solid;
 }
 
-.fontOptionButton{
-    flex: 25%;
-    height: 2.4em;
-    padding: 0.5em;
-    filter: brightness(80%);
-}
-.fontOptionButton:hover{
-    filter: brightness(120%);
+.fontOption {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
-.priceDiv{
-    font-size: 24px;
+.fontOptionButton {
+	flex: 25%;
+	height: 2.4em;
+	padding: 0.5em;
+	filter: brightness(80%);
+}
+.fontOptionButton:hover {
+	filter: brightness(120%);
+}
+
+.priceDiv {
+	font-size: 24px;
+	text-align: center;
 }

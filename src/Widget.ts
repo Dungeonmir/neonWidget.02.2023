@@ -1,4 +1,5 @@
 import Bar from "./components/Bar/Bar"
+import Loader from "./components/Loader"
 import ObjectProperties from "./components/ObjectProperties/ObjectProperties"
 import WidgetCanvas from "./components/WidgetCanvas/WidgetCanvas"
 import { getColors, getData, getPriceElement } from "./resources/constants"
@@ -10,10 +11,13 @@ export default class Widget {
 	constructor() {
 		this._element = document.createElement("div")
 		document.querySelector("body").appendChild(this._element)
+		this._element.classList.add("containerCol")
 	}
 	async initialize() {
 		this._canvas = new WidgetCanvas(this._element)
+		const loader = new Loader(this._element)
 		await getData()
+		loader.hide()
 		getColors()
 		this._upbar = new Bar(this._element, this._canvas)
 		this._objectPropertiesBar = new ObjectProperties(

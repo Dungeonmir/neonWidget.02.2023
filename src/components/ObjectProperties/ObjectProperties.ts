@@ -25,9 +25,6 @@ export default class ObjectProperties {
 		canvas._canvas.on("selection:cleared", () => {
 			this.updateVisibility()
 		})
-		canvas._canvas.on("selection:updated", () => {
-			this.updateVisibility()
-		})
 
 		this.optionText()
 		this.optionColors()
@@ -41,7 +38,13 @@ export default class ObjectProperties {
 	}
 	addOption(labelText: string = "") {
 		const label = document.createElement("div")
-		label.classList.add(labelText)
+		const labelTextElement = document.createElement("p")
+
+		labelTextElement.textContent = labelText
+		labelTextElement.classList.add("text")
+		labelTextElement.classList.add("labelText")
+		label.appendChild(labelTextElement)
+
 		label.classList.add("label")
 		this._element.appendChild(label)
 		const option = this.addOptionDiv()
@@ -64,7 +67,6 @@ export default class ObjectProperties {
 	}
 	updateVisibility() {
 		this._element.classList.toggle("hidden")
-
 		this.showPrice()
 	}
 	optionText() {
@@ -72,7 +74,6 @@ export default class ObjectProperties {
 		const input = document.createElement("textarea")
 		input.classList.add("textarea")
 		input.placeholder = "Ваш текст"
-		input.rows = 3
 		optionElement.appendChild(input)
 		input.oninput = (e) => {
 			const value = (e.target as HTMLTextAreaElement).value
@@ -81,6 +82,16 @@ export default class ObjectProperties {
 			})
 			this._canvas.update()
 		}
+		this._canvas._canvas.on("selection:updated", () => {
+			input.value = (
+				this._canvas._selectedObjects[0] as ShadowText
+			).getText()
+		})
+		this._canvas._canvas.on("selection:created", () => {
+			input.value = (
+				this._canvas._selectedObjects[0] as ShadowText
+			).getText()
+		}) //  Обновление данных текста при выделении
 	}
 	optionColors() {
 		const optionElement = this.addOption("Цвет")
@@ -105,7 +116,6 @@ export default class ObjectProperties {
 			)
 			button.getElement().classList.add("fontOptionButton")
 			button.getElement().style.fontFamily = font
-			button.getElement().style.fontSize = "1em"
 		})
 	}
 	changeShadow(color: string) {

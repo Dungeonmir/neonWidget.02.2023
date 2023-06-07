@@ -17,7 +17,6 @@ export default class Bar {
 		this._element = document.createElement("div")
 		mountElement.appendChild(this._element)
 		this._element.classList.add("bar")
-
 		this._downloader = new Downloader(mountElement)
 
 		const buttons = [
@@ -29,7 +28,7 @@ export default class Bar {
 				icon: AddTextIcon,
 			},
 			{
-				name: "Выровнять по горизонтали",
+				name: "Выравнять по горизонтали",
 				func: () => {
 					canvas._selectedObjects?.map((obj) => {
 						canvas.alignObject(obj, true, false)
@@ -38,7 +37,7 @@ export default class Bar {
 				icon: CenterHorizontalIcon,
 			},
 			{
-				name: "Выровнять по вертикали",
+				name: "Выравнять по вертикали",
 				func: () => {
 					canvas._selectedObjects?.map((obj) => {
 						canvas.alignObject(obj, false, true)

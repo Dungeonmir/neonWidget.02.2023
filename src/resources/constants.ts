@@ -83,7 +83,7 @@ export const getData = async () => {
 		const controller = new AbortController()
 		const timeout = setTimeout(() => {
 			controller.abort() // Если время вышло, остановка запроса
-		}, 3000) // Установка времени ожидания в 3 секунды
+		}, 5000) // Установка времени ожидания в 5 секунд
 
 		const response = await fetch(serverUrl + "/data", {
 			method: "GET",
@@ -102,7 +102,7 @@ export const getData = async () => {
 		}
 	} catch (error) {
 		if (error.name === "AbortError") {
-			console.error("Request timed out.")
+			console.error("Превышено время ожидания сервера.")
 		} else {
 			console.error(error.message)
 		}

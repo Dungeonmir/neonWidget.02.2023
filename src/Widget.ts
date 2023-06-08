@@ -12,6 +12,7 @@ export default class Widget {
 		this._element = document.createElement("div")
 		document.querySelector("body").appendChild(this._element)
 		this._element.classList.add("containerCol")
+		this._element.style.overflow = "hidden"
 	}
 	async initialize() {
 		this._canvas = new WidgetCanvas(this._element)

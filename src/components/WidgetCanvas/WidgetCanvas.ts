@@ -9,11 +9,16 @@ export default class WidgetCanvas {
 	_canvas: fabric.Canvas
 	_selectedObjects: fabric.Object[]
 	constructor(mountElement: HTMLDivElement) {
+		var containerWidth =
+			window.innerWidth < 500 ? window.innerWidth - 30 : 500
 		const canvasClass = "canvasFabric"
 		this.makeCanvasDiv(mountElement, canvasClass)
 		this._canvas = new fabric.Canvas(canvasClass)
 		this._canvas.setBackgroundColor("#101010", () => {})
-		this._canvas.setDimensions({ height: 500, width: 500 })
+		this._canvas.setDimensions({
+			width: containerWidth,
+			height: containerWidth,
+		})
 		this._canvas.on("selection:created", () => {
 			this._selectedObjects = this._canvas.getActiveObjects()
 		})

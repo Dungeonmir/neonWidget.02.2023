@@ -8,6 +8,7 @@ export default class Widget {
 	private _upbar: Bar
 	private _canvas: WidgetCanvas
 	private _objectPropertiesBar: ObjectProperties
+	private _loader: Loader
 	constructor() {
 		this._element = document.createElement("div")
 		document.querySelector("body").appendChild(this._element)
@@ -16,9 +17,9 @@ export default class Widget {
 	}
 	async initialize() {
 		this._canvas = new WidgetCanvas(this._element)
-		const loader = new Loader(this._element)
+		this._loader = new Loader(this._element)
 		await getData()
-		loader.hide()
+		this._loader.hide()
 		getColors()
 		this._upbar = new Bar(this._element, this._canvas)
 		this._objectPropertiesBar = new ObjectProperties(

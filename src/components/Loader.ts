@@ -56,6 +56,9 @@ export default class Loader {
 	hide = () => {
 		this._element.style.display = "none"
 	}
+	show = () => {
+		this._element.style.display = "flex"
+	}
 	constructor(mountPlace: HTMLElement) {
 		this._element = document.createElement("div")
 		this._element.classList.add("containerRow")

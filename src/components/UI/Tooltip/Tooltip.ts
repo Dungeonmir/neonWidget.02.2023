@@ -1,7 +1,11 @@
 import './tooltip.css'
 export default class Tooltip {
-    private _text: string
     private _spanElement: HTMLSpanElement
+    private _text: string
+
+    get text() {
+        return this._text;
+      }
 
     constructor(text: string, mountPlace: HTMLElement) {
  
@@ -14,18 +18,16 @@ export default class Tooltip {
         mountPlace.appendChild(this._spanElement)
     }
 
-    get text() {
-        return this._text;
-      }
-    set text(text){
-        this._text = text
-    }
-    onHoverShowHigher(htmlEl: HTMLElement, onhoverZindex = '5', nohoverZindex = '1'){
+    private onHoverShowHigher(htmlEl: HTMLElement, onhoverZindex = '5', nohoverZindex = '1'){
         htmlEl.addEventListener('mouseover', ()=>{
             htmlEl.style.zIndex = onhoverZindex
         })
         htmlEl.addEventListener('mouseout', ()=>{
             htmlEl.style.zIndex = nohoverZindex
         })
+    }
+
+    set text(text){
+        this._text = text
     }
 }

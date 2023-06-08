@@ -10,6 +10,15 @@ export default class ShadowText extends fabric.Group {
         }
         this.changeShadow()
     }
+
+    changeFont(font: string){
+        this.getObjects().map((textObj: fabric.Text)=>{
+            textObj.set({fontFamily: font})
+        })
+        this.set('dirty', true)
+        this.addWithUpdate()
+    }
+
     changeShadow(colorOfShadow = this._colorOfShadow){
             this.getObjects().map((textObj, i)=>{
                 textObj.shadow = new fabric.Shadow({
@@ -30,12 +39,5 @@ export default class ShadowText extends fabric.Group {
     }
     getText(){
         return (this.getObjects()[0] as fabric.Text).text
-    }
-    changeFont(font: string){
-        this.getObjects().map((textObj: fabric.Text)=>{
-            textObj.set({fontFamily: font})
-        })
-        this.set('dirty', true)
-        this.addWithUpdate()
     }
 }

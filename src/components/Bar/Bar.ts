@@ -11,8 +11,8 @@ import DownloadIcon from "../../icons/download.svg"
 import Downloader from "./Downloder"
 
 export default class Bar {
-	_element: HTMLDivElement
-	_downloader: Downloader
+	private _downloader: Downloader
+	private _element: HTMLDivElement
 	constructor(mountElement: HTMLDivElement, canvas: WidgetCanvas) {
 		this._element = document.createElement("div")
 		mountElement.appendChild(this._element)

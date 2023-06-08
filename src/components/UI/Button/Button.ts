@@ -1,8 +1,12 @@
 import './button.css'
 export default class Button {
-    private _text: string
-    private _onClick: Function
     private _buttonDiv: HTMLButtonElement
+    private _onClick: Function
+    private _text: string
+
+    get text() {
+        return this._text;
+      }
 
     constructor(text: string = "", onclick: Function, mountPlace: HTMLElement) {
  
@@ -15,14 +19,11 @@ export default class Button {
         mountPlace.appendChild(this._buttonDiv)
     }
 
-    get text() {
-        return this._text;
-      }
-    set text(text){
-        this._text = text
-    }
-    
     getElement(){
         return this._buttonDiv
+    }
+
+    set text(text){
+        this._text = text
     }
 }

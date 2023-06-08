@@ -1,12 +1,6 @@
 export default class Loader {
 	private _element: HTMLDivElement
-	createLoaderLabel = () => {
-		const label = document.createElement("div")
-		label.textContent = "Уточняем данные"
-		label.classList.add("text")
-		return label
-	}
-	createLoader = () => {
+	private createLoader = () => {
 		const div = document.createElement("div")
 		this._element.classList.add("loader")
 		div.insertAdjacentHTML(
@@ -53,11 +47,17 @@ export default class Loader {
 		)
 		return div
 	}
+	private createLoaderLabel = () => {
+		const label = document.createElement("div")
+		label.textContent = "Уточняем данные"
+		label.classList.add("text")
+		return label
+	}
+	private show = () => {
+		this._element.style.display = "flex"
+	}
 	hide = () => {
 		this._element.style.display = "none"
-	}
-	show = () => {
-		this._element.style.display = "flex"
 	}
 	constructor(mountPlace: HTMLElement) {
 		this._element = document.createElement("div")

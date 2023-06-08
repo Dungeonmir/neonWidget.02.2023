@@ -11,8 +11,8 @@ import ColorPickButtons from "./ColorButtons/ColorPickButtons"
 import "./objectProperties.css"
 
 export default class ObjectProperties {
-	private _element: HTMLDivElement
 	private _canvas: WidgetCanvas
+	private _element: HTMLDivElement
 	constructor(mountElement: HTMLDivElement, canvas: WidgetCanvas) {
 		this._element = document.createElement("div")
 		this._element.classList.add("objectProperties", "hidden")
@@ -32,13 +32,7 @@ export default class ObjectProperties {
 		this.optionPrice()
 	}
 
-	addOptionDiv() {
-		const optionDiv = document.createElement("div")
-		optionDiv.classList.add("option")
-		return optionDiv
-	}
-
-	addOption(labelText: string = "") {
+	private addOption(labelText: string = "") {
 		const label = document.createElement("div")
 		const labelTextElement = document.createElement("p")
 
@@ -55,7 +49,13 @@ export default class ObjectProperties {
 		return option
 	}
 
-	addRange(
+	private addOptionDiv() {
+		const optionDiv = document.createElement("div")
+		optionDiv.classList.add("option")
+		return optionDiv
+	}
+
+	private addRange(
 		min: string,
 		max: string,
 		step: string,
@@ -69,12 +69,54 @@ export default class ObjectProperties {
 		mountElement.appendChild(range)
 	}
 
-	toggleVisibility() {
-		this._element.classList.toggle("hidden")
-		this.showPrice()
+	private changeShadow(color: string) {
+		this._canvas._selectedObjects.map((obj: ShadowText) => {
+			obj.changeShadow(color)
+			obj.dirty = true
+		})
+		this._canvas.update()
 	}
 
-	optionText() {
+	private optionColors() {
+		const optionElement = this.addOption("Цвет")
+		const colorPickButtons = new ColorPickButtons(this._canvas)
+		optionElement.appendChild(colorPickButtons.element)
+	}
+
+	private optionFonts() {
+		const option = this.addOption("Шрифт")
+		option.classList.add("fontOption")
+		fonts.map((font) => {
+			const button = new Button(
+				font,
+				//Исполняется при нажатии кнопки, меняя шрифт
+				() => {
+					this._canvas._selectedObjects.map((obj: ShadowText) => {
+						obj.changeFont(font)
+					})
+					this._canvas.update()
+					this.showPrice()
+				},
+				option
+			)
+			button.getElement().classList.add("fontOptionButton")
+			button.getElement().style.fontFamily = font
+		})
+	}
+
+	private optionPrice() {
+		const option = this.addOption("Стоимость")
+		const priceDiv = document.createElement("div")
+		priceDiv.classList.add("priceDiv")
+		priceDiv.textContent = ""
+		option.appendChild(priceDiv)
+
+		this._canvas._canvas.on("object:modified", () => {
+			this.showPrice()
+		})
+	}
+
+	private optionText() {
 		const optionElement = this.addOption("Текст")
 		const input = document.createElement("textarea")
 		input.classList.add("textarea")
@@ -99,54 +141,7 @@ export default class ObjectProperties {
 		}) //  Обновление данных текста при выделении
 	}
 
-	optionColors() {
-		const optionElement = this.addOption("Цвет")
-		const colorPickButtons = new ColorPickButtons(this._canvas)
-		optionElement.appendChild(colorPickButtons.element)
-	}
-
-	optionFonts() {
-		const option = this.addOption("Шрифт")
-		option.classList.add("fontOption")
-		fonts.map((font) => {
-			const button = new Button(
-				font,
-				//Исполняется при нажатии кнопки, меняя шрифт
-				() => {
-					this._canvas._selectedObjects.map((obj: ShadowText) => {
-						obj.changeFont(font)
-					})
-					this._canvas.update()
-					this.showPrice()
-				},
-				option
-			)
-			button.getElement().classList.add("fontOptionButton")
-			button.getElement().style.fontFamily = font
-		})
-	}
-
-	changeShadow(color: string) {
-		this._canvas._selectedObjects.map((obj: ShadowText) => {
-			obj.changeShadow(color)
-			obj.dirty = true
-		})
-		this._canvas.update()
-	}
-
-	optionPrice() {
-		const option = this.addOption("Стоимость")
-		const priceDiv = document.createElement("div")
-		priceDiv.classList.add("priceDiv")
-		priceDiv.textContent = ""
-		option.appendChild(priceDiv)
-
-		this._canvas._canvas.on("object:modified", () => {
-			this.showPrice()
-		})
-	}
-
-	showPrice() {
+	private showPrice() {
 		const selection = this._canvas.selectAll()
 		selection.ungroupOnCanvas()
 		let price = 0
@@ -179,5 +174,10 @@ export default class ObjectProperties {
 			"Примерная стоимость вывески",
 			priceDiv as HTMLDivElement
 		)
+	}
+
+	private toggleVisibility() {
+		this._element.classList.toggle("hidden")
+		this.showPrice()
 	}
 }

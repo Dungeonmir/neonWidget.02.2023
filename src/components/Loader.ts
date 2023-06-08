@@ -4,7 +4,7 @@ export default class Loader {
 		const div = document.createElement("div")
 		this._element.classList.add("loader")
 		div.insertAdjacentHTML(
-			"afterbegin",
+			"beforeend",
 
 			`<div
 				class="loader"

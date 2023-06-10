@@ -20,7 +20,7 @@ export default class Downloader {
 		} else {
 			return canvas._canvas.toDataURL({
 				format: "png",
-				multiplier: 2,
+				multiplier: 3,
 				withoutTransform: true,
 			})
 		}
